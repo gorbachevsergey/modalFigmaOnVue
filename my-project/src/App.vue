@@ -14,7 +14,6 @@
 import choicePlan from './components/choiceplan.vue'
 
 export default {
-  name: 'App',
   components: {
     choicePlan
   },
