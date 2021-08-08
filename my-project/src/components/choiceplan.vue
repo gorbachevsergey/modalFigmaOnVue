@@ -1,16 +1,14 @@
 <template>
-  <div class="program-selection">
-    <div class="selection__header">
-      <h2>Выберите вариант для себя</h2>
+    <div class="program-selection">
+      <div class="selection__header">
+        <h2>Выберите вариант для себя</h2>
+      </div>
+      <div v-for="(element,index) in subscription" :key="index" class="subscription__body" >
+        <input type="radio" id="subscription-one-time" name="subscription" v-model="element.isActive" @change="changeCheckbox">
+        <label class="subscription-label" for="subscription-one-time">{{ element.name }}</label>
+        <label class="subscription-label-price price-one-time" for="subscription-one-time">{{ element.value }}</label>
+      </div>
     </div>
-    <div v-for="sub in subscription" :key="subscription" class="subscription__body" >
-      <input type="radio" id="subscription-one-time" name="subscription" v-model="sub.isActive">
-      <label class="subscription-label" for="subscription-one-time">{{ sub.name }}</label>
-      <label class="subscription-label-price price-one-time" for="subscription-one-time">{{ sub.value }}</label>
-    </div>
-  </div>
-
-
 </template>
 
 
@@ -18,7 +16,15 @@
 
 <script>
   export default {
-    props:['subscription'],
+    props:{
+      subscription: Array,
+    },
+    methods:{
+      changeCheckbox: function (){
+        console.log(this.element)
+
+      }
+    }
   }
 </script>
 
