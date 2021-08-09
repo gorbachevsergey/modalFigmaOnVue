@@ -3,8 +3,8 @@
 
   <div>
     <div class="choice-program">
-      <choicePlan :subscription = "choiceSubscription"  @checkRadio="choiceRadio"></choicePlan>
-      <planOneTime :oneTime = "oneTime" v-if=" choice === 'Разовые услуги'"></planOneTime>
+      <choicePlan :subscription = "choiceSubscription" :summa="summa" @checkRadio="choiceRadio"></choicePlan>
+      <planOneTime :oneTime = "oneTime" v-if=" choice === 'Разовые услуги'" @cashAll="cashAll"></planOneTime>
       <otherPlans :allSubscriptions = "allSubscriptions[0].oneMonth" v-else-if=" choice  === 'Подписка на 1 месяц'" ></otherPlans>
     </div>
   </div>
@@ -78,38 +78,38 @@ export default {
           services:[
             {
               name:'Проблемы с ЖКТ',
-              text:'',
-              value: '13866',
+
+              value: 13866,
               type: 'checkbox'
             },
             {
               name:'Хочу похудеть',
-              text:'',
-              value: '5092',
+
+              value: 5092,
               type: 'checkbox'
             },
             {
               name:'Вегетарианство',
-              text:'',
-              value: '8402',
+
+              value: 8402,
               type: 'checkbox'
             },
             {
               name:'Спорт',
-              text:'',
-              value: '8934',
+
+              value: 8934,
               type: 'checkbox'
             },
             {
               name:'Общая диагностика',
-              text:'',
-              value: '8591',
+
+              value: 8591,
               type: 'checkbox'
             },
             {
               name:'Нет энергии',
-              text:'',
-              value: '14130',
+
+              value: 14130,
               type: 'checkbox'
             }
           ]
@@ -119,20 +119,17 @@ export default {
           services: [
             {
               name:'Москва в пределах МКАД',
-              text:'',
-              value: '1796',
+              value: 1796,
               type: 'radio',
             },
             {
               name:'до 20 км от МКАД',
-              text:'',
-              value: '4490',
+              value: 4490,
               type: 'radio',
             },
             {
               name:'от 20 до 30 км от МКАД',
-              text:'',
-              value: '5986',
+              value: 5986,
               type: 'radio',
             }
           ]
@@ -146,22 +143,28 @@ export default {
                 title: 'Сюда входит',
                 services:[
                   {
-                    name:'Консультация нутрициолога'
+                    name:'Консультация нутрициолога',
+                    type: 'list'
                   },
                   {
-                    name: 'Сопровождение онлайн в персональном чате'
+                    name: 'Сопровождение онлайн в персональном чате',
+                    type: 'list'
                   },
                   {
-                    name: 'Рекомендации по выбору продуктов'
+                    name: 'Рекомендации по выбору продуктов',
+                    type: 'list'
                   },
                   {
-                    name: 'Анализ вашей продуктовой корзины'
+                    name: 'Анализ вашей продуктовой корзины',
+                    type: 'list'
                   },
                   {
-                    name: 'Формирование новой продуктовой корзины'
+                    name: 'Формирование новой продуктовой корзины',
+                    type: 'list'
                   },
                   {
-                    name: 'Шоппинг-сопровождение (2 часа)'
+                    name: 'Шоппинг-сопровождение (2 часа)',
+                    type: 'list'
                   }
 
                 ]
@@ -171,27 +174,33 @@ export default {
                 services:[
                   {
                     name:'Проблемы с ЖКТ',
-                    value: '13866',
+                    value: 13866,
+                    type: 'checkbox'
                   },
                   {
                     name:'Хочу похудеть',
-                    value: '5092',
+                    value: 5092,
+                    type: 'checkbox'
                   },
                   {
                     name:'Вегетарианство',
-                    value: '8402',
+                    value: 8402,
+                    type: 'checkbox'
                   },
                   {
                     name:'Спорт',
-                    value: '8934',
+                    value: 8934,
+                    type: 'checkbox'
                   },
                   {
                     name:'Общая диагностика',
-                    value: '8591',
+                    value: 8591,
+                    type: 'checkbox'
                   },
                   {
                     name:'Нет энергии',
-                    value: '14130',
+                    value: 14130,
+                    type: 'checkbox'
                   }
                 ]
               },
@@ -200,15 +209,18 @@ export default {
                 services: [
                   {
                     name:'Москва в пределах МКАД',
-                    value: '1796',
+                    value: 1796,
+                    type: 'radio',
                   },
                   {
                     name:'до 20 км от МКАД',
-                    value: '4490',
+                    value: 4490,
+                    type: 'radio',
                   },
                   {
                     name:'от 20 до 30 км от МКАД',
-                    value: '5986',
+                    value: 5986,
+                    type: "radio",
                   }
                 ]
               }
@@ -216,13 +228,20 @@ export default {
           }
       ],
       choice : '',
-
+      summa : 0,
     }
   },
   methods: {
     choiceRadio(data){
       this.choice = data
+    },
+    cashAll(data){
+      this.summa = data
+
     }
+  },
+  computed:{
+
   }
 }
 </script>
@@ -233,5 +252,8 @@ export default {
   height: 693px;
   display: flex;
   margin: auto;
+
 }
+
+
 </style>

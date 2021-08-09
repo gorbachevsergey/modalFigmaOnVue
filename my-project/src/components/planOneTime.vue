@@ -9,8 +9,8 @@
         <p>{{element.text}}</p>
       </div>
       <div class="item__checkbox">
-          <input type="checkbox" name="one-time__checkbox" :value="element.value">
-          <label> {{ element.value }} </label>
+        <input type="checkbox" name="one-time__checkbox" :value="element.value" v-model="checked" @change="cashAll">
+        <label> {{ element.value }} </label>
       </div>
     </div>
   </div>
@@ -20,10 +20,29 @@
 
 <script>
   export default {
+    data: function (){
+      return {
+        checked: [],
+
+      }
+    },
     props:{
       oneTime : Array,
+    },
+    methods:{
+      cashAll:function (){
+        this.$emit('cashAll',this.totalCost)
+      },
+    },
+    computed:{
+      totalCost : function (){
+        return this.checked.reduce(function (sum,current){
+          return sum + current
+        },0)
+      }
     }
   }
+
 </script>
 
 <style scoped>
@@ -115,9 +134,9 @@
     -webkit-transform: translateX(0);
     transform: translateX(0);
     -webkit-transition: opacity 0.2s, -webkit-transform 0.3s ease;
-
     transition: transform 0.3s ease, opacity 0.2s, -webkit-transform 0.3s ease;
   }
+
   input[type='checkbox']:checked{
     background: #104A27;
     -webkit-transition: opacity 0.3s, -webkit-transform 0.6s cubic-bezier(.2, .85, .32, 1.2);
@@ -134,6 +153,7 @@
   }
   input[type='checkbox']:checked:after {
     background: white;
+
     -webkit-transform: translateX(15px);
     transform: translateX(15px);
   }

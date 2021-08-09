@@ -8,7 +8,7 @@
           <input type="radio" v-model="check" :value="element.name" name="subscription" @change="changeCheckbox">
           <label class="subscription-label" >{{element.name}} </label>
         </div>
-        <label class="subscription-label-price ">{{element.value}} </label>
+        <label class="subscription-label-price ">{{summa}} </label>
       </div>
       <div class="btn">Оформить</div>
     </div>
@@ -21,6 +21,7 @@
   export default {
     props:{
       subscription: Array,
+      summa:Number,
     },
     data : function(){
       return {
@@ -115,6 +116,8 @@
   input[type='radio']:checked:after {
     -webkit-transform: scale(0.5);
     transform: scale(0.5);
+    -webkit-transform: rotate(43deg);
+    transform: rotate(43deg);
   }
   input[type='radio']:after {
     top: 4px;
@@ -128,11 +131,7 @@
     transform: rotate(20deg);
 
   }
-  input[type='radio']:checked:after {
-    -webkit-transform: rotate(43deg);
-    transform: rotate(43deg);
 
-  }
 }
 
 .program-selection {
@@ -198,7 +197,4 @@
   margin-top: 50px;
 }
 
-input{
-
-}
 </style>
