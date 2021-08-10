@@ -32,19 +32,18 @@
       subscription: Array,
       summa: {
         type: Number,
+
       }
     },
     data : function(){
       return {
         check: [],
-
       }
     },
     methods:{
       changeCheckbox: function (){
         this.$emit('checkRadio',this.check)
       },
-
     },
   }
 </script>

@@ -233,16 +233,15 @@ export default {
   },
   methods: {
     choiceRadio(data){
+      this.summa = 0
       this.choice = data[0]
     },
     cashAll(data){
       this.summa = data
 
+
     }
   },
-  computed:{
-
-  }
 }
 </script>
 
