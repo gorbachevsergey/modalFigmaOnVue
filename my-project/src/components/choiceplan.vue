@@ -3,12 +3,21 @@
       <div class="selection__header">
         <h2>Выберите вариант для себя</h2>
       </div>
-      <div class="subscription" v-for="(element,index) in subscription" :key="index">
-        <div style="display: flex">
-          <input type="radio" v-model="check" :value="element.name" name="subscription" @change="changeCheckbox">
-          <label class="subscription-label" >{{element.name}} </label>
+      <div v-for="(element,index) in subscription" :key="index">
+        <div v-if="index === check[1]" class="subscription" >
+          <div style="display: flex">
+            <input type="radio" v-model="check" :value="[element.name,index]" name="subscription" @change="changeCheckbox">
+            <label class="subscription-label" >{{element.name}} </label>
+          </div>
+          <label class="subscription-label-price test">{{summa > element.value ? summa : element.value}}</label>
         </div>
-        <label class="subscription-label-price ">{{summa}} </label>
+        <div v-else class="subscription" >
+          <div style="display: flex">
+            <input type="radio" v-model="check" :value="[element.name,index]" name="subscription" @change="changeCheckbox">
+            <label class="subscription-label" >{{element.name}} </label>
+          </div>
+          <label class="subscription-label-price ">{{element.value}}</label>
+        </div>
       </div>
       <div class="btn">Оформить</div>
     </div>
@@ -21,19 +30,22 @@
   export default {
     props:{
       subscription: Array,
-      summa:Number,
+      summa: {
+        type: Number,
+      }
     },
     data : function(){
       return {
-        check: []
+        check: [],
+
       }
     },
     methods:{
       changeCheckbox: function (){
         this.$emit('checkRadio',this.check)
+      },
 
-      }
-    }
+    },
   }
 </script>
 

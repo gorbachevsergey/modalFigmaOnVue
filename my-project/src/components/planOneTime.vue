@@ -38,8 +38,7 @@
       totalCost : function (){
         return this.checked.reduce(function (sum,current){
           return sum + current
-        },0)
-      }
+        },0)}
     }
   }
 

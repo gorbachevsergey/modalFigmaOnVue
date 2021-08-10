@@ -5,7 +5,7 @@
     <div class="choice-program">
       <choicePlan :subscription = "choiceSubscription" :summa="summa" @checkRadio="choiceRadio"></choicePlan>
       <planOneTime :oneTime = "oneTime" v-if=" choice === 'Разовые услуги'" @cashAll="cashAll"></planOneTime>
-      <otherPlans :allSubscriptions = "allSubscriptions[0].oneMonth" v-else-if=" choice  === 'Подписка на 1 месяц'" ></otherPlans>
+      <otherPlans :allSubscriptions = "allSubscriptions[0].oneMonth" v-else-if=" choice  === 'Подписка на 1 месяц'" @cashAll="cashAll"></otherPlans>
     </div>
   </div>
 
@@ -233,7 +233,7 @@ export default {
   },
   methods: {
     choiceRadio(data){
-      this.choice = data
+      this.choice = data[0]
     },
     cashAll(data){
       this.summa = data
