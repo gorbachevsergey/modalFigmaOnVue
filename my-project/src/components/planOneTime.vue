@@ -1,7 +1,7 @@
 <template>
 
 <div class="program-selection">
-  <div v-for="(value,ind) in oneTime" :key="ind"  class="service-selection service-selection__one-time" >
+  <div v-for="(value,ind) in choiceOneTime" :key="ind"  class="service-selection service-selection__one-time" >
     <h3>{{value.title }}</h3>
     <div v-for="(element,index) in value.services" class="one-time__item" :key="index">
       <div class="item__text">
@@ -9,7 +9,7 @@
         <p>{{element.text}}</p>
       </div>
       <div class="item__checkbox">
-        <input type="checkbox" name="one-time__checkbox" :value="element.value" v-model="checked" @change="cashAll">
+        <input type="checkbox" name="one-time__checkbox" :value="element.value" v-model="checked">
         <label> {{ element.value }} </label>
       </div>
     </div>
@@ -19,27 +19,24 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   export default {
     data: function (){
       return {
         checked: [],
-
       }
     },
-    props:{
-      oneTime : Array,
-    },
     methods:{
-      cashAll:function (){
-        this.$emit('cashAll',this.totalCost)
-      },
-    },
-    computed:{
       totalCost : function (){
-        return this.checked.reduce(function (sum,current){
+        return this.checkedRadio + this.checked.reduce(function (sum,current){
           return sum + current
         },0)}
+    },
+    computed:{
+      ...mapGetters(['choiceOneTime']),
+
     }
+
   }
 
 </script>

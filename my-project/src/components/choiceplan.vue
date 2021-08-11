@@ -3,7 +3,7 @@
       <div class="selection__header">
         <h2>Выберите вариант для себя</h2>
       </div>
-      <div v-for="(element,index) in subscription" :key="index">
+      <div v-for="(element,index) in choiceSubscription" :key="index">
         <div v-if="index === check[1]" class="subscription" >
           <div style="display: flex">
             <input type="radio" v-model="check" :value="[element.name,index]" name="subscription" @change="changeCheckbox">
@@ -27,14 +27,8 @@
 
 
 <script>
+  import {mapGetters} from 'vuex'
   export default {
-    props:{
-      subscription: Array,
-      summa: {
-        type: Number,
-
-      }
-    },
     data : function(){
       return {
         check: [],
@@ -42,9 +36,12 @@
     },
     methods:{
       changeCheckbox: function (){
-        this.$emit('checkRadio',this.check)
+        this.$store.dispatch('AllSumma',[0])
+        this.$store.dispatch('checkSub',this.check)
       },
     },
+    computed: mapGetters(['choiceSubscription','summa']),
+
   }
 </script>
 

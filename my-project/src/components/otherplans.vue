@@ -1,6 +1,6 @@
 <template>
   <div class="program-selection">
-    <div v-for="(value,ind) in allSubscriptions" :key="ind"  class="service-selection service-selection__one-time" >
+    <div v-for="(value,ind) in choiceOneMonth[0].oneMonth" :key="ind"  class="service-selection service-selection__one-time" >
       <h3>{{value.title }}</h3>
       <div v-for ="(element,index) in value.services"  :key="index">
         <div v-if  = "element.type === 'checkbox'" class="one-time__item">
@@ -9,7 +9,7 @@
             <p>{{element.text}}</p>
           </div>
           <div class="item__checkbox">
-            <input type="checkbox" v-model="checked" name="one-time__checkbox" :value="element.value" @change="cashAll">
+            <input type="checkbox" v-model="checked" name="one-time__checkbox" :value="element.value" @change="totalCost">
             <label> {{ element.value }} </label>
           </div>
         </div>
@@ -19,7 +19,7 @@
             <p>{{element.text}}</p>
           </div>
           <div class="item__checkbox">
-            <input type="radio" v-model="checkedRadio" name="one-time__checkbox" :value="element.value" @change="cashAll">
+            <input type="radio" v-model="checkedRadio" name="one-time__checkbox" :value="element.value">
             <label> {{ element.value }} </label>
           </div>
         </div >
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   export default {
     data: function (){
       return {
@@ -44,22 +45,17 @@
         checkedRadio:0,
       }
     },
-    props: {
-      allSubscriptions: Array,
-    },
     methods: {
-      cashAll:function (){
-        this.$emit('cashAll',this.totalCost)
-      },
+      totalCost : function (){
+        return this.$store.dispatch('AllSumma',this.checked)
+      }
     },
     computed:{
-      totalCost : function (){
-        return this.checkedRadio + this.checked.reduce(function (sum,current){
-          return sum + current
-        },0)}
+      ...mapGetters(['choiceOneMonth']),
+
     },
   }
-
+/*  this.$store.dispatch('checkSub',this.check)*/
 </script>
 
 <style scoped>
