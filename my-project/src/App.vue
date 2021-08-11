@@ -1,6 +1,4 @@
 <template>
-
-
   <div>
     <div class="choice-program">
       <choicePlan :subscription = "choiceSubscription" :summa="summa" @checkRadio="choiceRadio"></choicePlan>
@@ -8,9 +6,6 @@
       <otherPlans :allSubscriptions = "allSubscriptions[0].oneMonth" v-else-if=" choice  === 'Подписка на 1 месяц'" @cashAll="cashAll"></otherPlans>
     </div>
   </div>
-
-
-
 </template>
 
 <script>
