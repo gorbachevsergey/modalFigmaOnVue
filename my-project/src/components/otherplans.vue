@@ -55,7 +55,7 @@
 
     },
   }
-/*  this.$store.dispatch('checkSub',this.check)*/
+
 </script>
 
 <style scoped>

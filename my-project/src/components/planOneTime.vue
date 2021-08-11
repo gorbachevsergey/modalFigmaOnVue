@@ -9,7 +9,7 @@
         <p>{{element.text}}</p>
       </div>
       <div class="item__checkbox">
-        <input type="checkbox" name="one-time__checkbox" :value="element.value" v-model="checked">
+        <input type="checkbox" name="one-time__checkbox" :value="element.value" v-model="checked" @change="totalCost">
         <label> {{ element.value }} </label>
       </div>
     </div>
@@ -28,9 +28,8 @@
     },
     methods:{
       totalCost : function (){
-        return this.checkedRadio + this.checked.reduce(function (sum,current){
-          return sum + current
-        },0)}
+        return this.$store.dispatch('AllSumma',this.checked)
+      }
     },
     computed:{
       ...mapGetters(['choiceOneTime']),
